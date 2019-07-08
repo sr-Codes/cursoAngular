@@ -1,0 +1,9 @@
+<p *ngFor="let item of [1,2,3,4,5]">
+  <span *ngIf="item%2 == 0; else otro">
+    Registro {{ item }}
+  </span>
+</p>
+
+<ng-template #otro>
+  Registro impar {{ item }}
+</ng-template>
