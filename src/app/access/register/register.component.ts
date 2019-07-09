@@ -41,26 +41,22 @@ export class RegisterComponent implements OnInit {
 
   registrarUsuario() {
     const API_USERS_URL = 'http://s739192398.mialojamiento.es/cmm/api/usuarios.php';
-    console.log(this.registroDatos);
-    alert(JSON.stringify(this.registroDatos));
-    let datosApi: any = {
+    const datosApi: any = {
       key_marca_plataforma: 'FORMACION_PLAT1',
       option: 'registerUser',
       email: this.registroDatos.email,
       contrasena: this.registroDatos.password,
       nombre: this.registroDatos.nombre,
       apellidos: this.registroDatos.apellidos,
-    }
+    };
     this.http.post(API_USERS_URL, datosApi).subscribe (
       (data: any) => {
-        console.log(data);
         if (data.status === 'OK') {
           this.msgerror = '';
         } else {
           this.msgerror = data.msg;
         }
       }, errorHttp => {
-        console.log(errorHttp);
         this.msgerror = 'Error interno';
       }
     );

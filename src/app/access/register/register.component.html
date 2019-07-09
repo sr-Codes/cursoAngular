@@ -5,10 +5,10 @@
 			<label for="nombre">Nombre</label>
 			<input type="text" class="form-control" id="nombre" required [(ngModel)]="registroDatos.nombre" name="nombre" #nombreErr="ngModel" minlength="5">
 			<div [hidden]="nombreErr.valid || nombreErr.pristine" class="alert alert-danger">
-				<div *ngIf="nombreErr.errors?.required">
+				<div *ngIf="nombreErr?.errors?.required">
 					Este campo es obligatorio
 				</div>
-				<div *ngIf="nombreErr.errors?.minlength">
+				<div *ngIf="nombreErr?.errors?.minlength">
 					La longitud mínima es de 5
 				</div>
 			</div>
@@ -17,10 +17,10 @@
 			<label for="apellidos">Apellidos</label>
 			<input type="text" class="form-control" id="apellidos" required [(ngModel)]="registroDatos.apellidos" name="apellidos" #apellidosErr="ngModel" minlength="5">
 			<div [hidden]="apellidosErr.valid || apellidosErr.pristine" class="alert alert-danger">
-				<div *ngIf="apellidosErr.errors?.required">
+				<div *ngIf="apellidosErr?.errors?.required">
 					Este campo es obligatorio
 				</div>
-				<div *ngIf="apellidosErr.errors?.minlength">
+				<div *ngIf="apellidosErr?.errors?.minlength">
 					La longitud mínima es de 5
 				</div>
 			</div>
@@ -29,10 +29,10 @@
 			<label for="password">password</label>
 			<input type="password" class="form-control" id="password" required [(ngModel)]="registroDatos.password" name="password" #passwordErr="ngModel" minlength="5">
 			<div [hidden]="passwordErr.valid || passwordErr.pristine" class="alert alert-danger">
-				<div *ngIf="passwordErr.errors?.required">
+				<div *ngIf="passwordErr?.errors?.required">
 					Este campo es obligatorio
 				</div>
-				<div *ngIf="passwordErr.errors?.minlength">
+				<div *ngIf="passwordErr?.errors?.minlength">
 					La longitud mínima es de 5
 				</div>
 			</div>
@@ -40,15 +40,15 @@
 		<div class="form-group">
 			<label for="email">Email</label>
 			<input type="text" class="form-control" id="email" required [(ngModel)]="registroDatos.email" name="email" #emailErr="ngModel" minlength="5"
-			pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$">
+			pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$" appForbiddenName="z@z.com">
 			<div [hidden]="emailErr.valid || emailErr.pristine" class="alert alert-danger">
-				<div *ngIf="emailErr.errors?.required">
+				<div *ngIf="emailErr?.errors?.required">
 					Este campo es obligatorio
 				</div>
-				<div *ngIf="emailErr.errors?.minlength">
+				<div *ngIf="emailErr?.errors?.minlength">
 					La longitud mínima es de 5
 				</div>
-				<div *ngIf="emailErr.errors?.pattern">
+				<div *ngIf="emailErr?.errors?.pattern">
 					El formato de email no es correcto
 				</div>
 			</div>
@@ -78,6 +78,12 @@
 			</div>
 		</div>
 		<button type="submit" class="btn btn-primary" [disabled]="!registroFormErr.valid">Enviar</button><br>
+		<div *ngIf="msgerror!=''" class="text-danger small">
+			{{ msgerror }}
+		</div>
+		<div *ngIf="msgerror==''" class="text-sucess small">
+			Operación realizada con éxito
+		</div>
 		{{ registroDatos | json }}
 	</form>
 </div>
