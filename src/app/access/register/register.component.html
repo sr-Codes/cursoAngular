@@ -26,6 +26,18 @@
 			</div>
 		</div>
 		<div class="form-group">
+			<label for="password">password</label>
+			<input type="password" class="form-control" id="password" required [(ngModel)]="registroDatos.password" name="password" #passwordErr="ngModel" minlength="5">
+			<div [hidden]="passwordErr.valid || passwordErr.pristine" class="alert alert-danger">
+				<div *ngIf="passwordErr.errors?.required">
+					Este campo es obligatorio
+				</div>
+				<div *ngIf="passwordErr.errors?.minlength">
+					La longitud mínima es de 5
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
 			<label for="email">Email</label>
 			<input type="text" class="form-control" id="email" required [(ngModel)]="registroDatos.email" name="email" #emailErr="ngModel" minlength="5"
 			pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$">

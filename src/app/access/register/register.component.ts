@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment.prod';
+import { HttpClient } from '@angular/common/http';
 
 interface IRegistroDatos {
   email: string;
@@ -23,24 +25,45 @@ export class RegisterComponent implements OnInit {
     sexo: '',
     idioma: '',
     isOk: '',
+    password: ''
   };
-
   msgerror: string = null;
 
   sexKeys = ['hombre', 'mujer'];
   idiomaKeys = [  {key: 'ES', idioma: 'Castellano'},
-                  {key: 'EN', idioma: 'Inglés'},
-                  {key: 'FR', idioma: 'Francés'},
-                  {key: 'IT', idioma: 'Italia'}];
+  {key: 'EN', idioma: 'Inglés'},
+  {key: 'FR', idioma: 'Francés'},
+  {key: 'IT', idioma: 'Italia'}];
 
-  constructor() { }
-
+  constructor(private http: HttpClient) { }
   ngOnInit() {
   }
 
   registrarUsuario() {
+    const API_USERS_URL = 'http://s739192398.mialojamiento.es/cmm/api/usuarios.php';
     console.log(this.registroDatos);
     alert(JSON.stringify(this.registroDatos));
+    let datosApi: any = {
+      key_marca_plataforma: 'FORMACION_PLAT1',
+      option: 'registerUser',
+      email: this.registroDatos.email,
+      contrasena: this.registroDatos.password,
+      nombre: this.registroDatos.nombre,
+      apellidos: this.registroDatos.apellidos,
+    }
+    this.http.post(API_USERS_URL, datosApi).subscribe (
+      (data: any) => {
+        console.log(data);
+        if (data.status === 'OK') {
+          this.msgerror = '';
+        } else {
+          this.msgerror = data.msg;
+        }
+      }, errorHttp => {
+        console.log(errorHttp);
+        this.msgerror = 'Error interno';
+      }
+    );
   }
 
 }
