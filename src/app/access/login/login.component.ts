@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   loginFormDatos = {
     email: '',
     contrasena: ''
-  }
+  };
 
   msgerror: string = null;
   constructor(private http: HttpClient, private session: SessionService) { }
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   }
 
   iniciarSession() {
-    let datosApi: any = {
+    const datosApi: any = {
       option: environment.SERVICIO_LOGIN_API,
       email: this.loginFormDatos.email,
       contrasena: this.loginFormDatos.contrasena
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
             email: datosApi.email,
             nombre: data.nombre,
             token: data.token
-          }
+          };
           this.session.setSession(dataSession);
           this.msgerror = '';
         } else {

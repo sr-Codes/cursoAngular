@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
 export interface ISession {
-  email: string,
-  nombre: string,
-  token: string
+  email: string;
+  nombre: string;
+  token: string;
 }
 
 @Injectable({
@@ -12,7 +12,8 @@ export interface ISession {
 })
 export class SessionService {
 
-  _contador: number = 0;
+// tslint:disable-next-line: variable-name
+  _contador = 0;
   localStorageName = 'myStorage';
   localStorage: any;
 
@@ -38,7 +39,8 @@ export class SessionService {
     return JSON.parse(localStorage.getItem(this.localStorageName)) as ISession;
   }
   validSession() {
-    const session: ISession = <ISession>this.getSession();
+// tslint:disable-next-line: no-angle-bracket-type-assertion
+    const session: ISession = <ISession> this.getSession();
     if (session != null && session.token) {
       return true;
     } else {
