@@ -1,97 +1,108 @@
-<div class="container">
-	<h4>REGISTRO USUARIO</h4>
-	<form (ngSubmit)="registrarUsuario()" #registroFormErr="ngForm" novalidate="">
-		<div class="form-group">
-			<label for="nombre">Nombre</label>
-			<input type="text" class="form-control" id="nombre" placeholder="Nombre" required [(ngModel)]="registroDatos.nombre" name="nombre" #nombreErr="ngModel" minlength="5">
-			<div [hidden]="nombreErr.valid || nombreErr.pristine" class="alert alert-danger">
-				<div *ngIf="nombreErr?.errors?.required">
-					Este campo es obligatorio
+<section id="register">
+	<div class="container">
+		<h4>REGISTRO USUARIO</h4>
+		<form (ngSubmit)="registrarUsuario()" #registroFormErr="ngForm" novalidate="">
+			<div class="form-group col-6">
+				<label for="nombre">Nombre</label>
+				<input type="text" class="form-control" id="nombre" placeholder="Nombre" required [(ngModel)]="registroDatos.nombre" name="nombre" #nombreErr="ngModel" minlength="5">
+				<div [hidden]="nombreErr.valid || nombreErr.pristine" class="alert alert-danger">
+					<div *ngIf="nombreErr?.errors?.required">
+						Este campo es obligatorio
+					</div>
+					<div *ngIf="nombreErr?.errors?.minlength">
+						La longitud mínima es de 5
+					</div>
 				</div>
-				<div *ngIf="nombreErr?.errors?.minlength">
-					La longitud mínima es de 5
-				</div>
-			</div>
-		</div> 
-		<div class="form-group">
-			<label for="apellidos">Apellidos</label>
-			<input type="text" class="form-control" id="apellidos" placeholder="Apellidos" required [(ngModel)]="registroDatos.apellidos" name="apellidos" #apellidosErr="ngModel" minlength="5">
-			<div [hidden]="apellidosErr.valid || apellidosErr.pristine" class="alert alert-danger">
-				<div *ngIf="apellidosErr?.errors?.required">
-					Este campo es obligatorio
-				</div>
-				<div *ngIf="apellidosErr?.errors?.minlength">
-					La longitud mínima es de 5
-				</div>
-			</div>
-		</div>
-		<div class="form-group">
-			<label for="password">Password</label>
-			<input type="password" class="form-control" id="password" placeholder="Password" required [(ngModel)]="registroDatos.password" name="password" #passwordErr="ngModel" minlength="5">
-			<div [hidden]="passwordErr.valid || passwordErr.pristine" class="alert alert-danger">
-				<div *ngIf="passwordErr?.errors?.required">
-					Este campo es obligatorio
-				</div>
-				<div *ngIf="passwordErr?.errors?.minlength">
-					La longitud mínima es de 5
+			</div> 
+			<div class="form-group col-6">
+				<label for="apellidos">Apellidos</label>
+				<input type="text" class="form-control" id="apellidos" placeholder="Apellidos" required [(ngModel)]="registroDatos.apellidos" name="apellidos" #apellidosErr="ngModel" minlength="5">
+				<div [hidden]="apellidosErr.valid || apellidosErr.pristine" class="alert alert-danger">
+					<div *ngIf="apellidosErr?.errors?.required">
+						Este campo es obligatorio
+					</div>
+					<div *ngIf="apellidosErr?.errors?.minlength">
+						La longitud mínima es de 5
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="form-group">
-			<label for="email">Email</label>
-			<input type="text" class="form-control" id="email" placeholder="Email" required [(ngModel)]="registroDatos.email" name="email" #emailErr="ngModel" minlength="5"
-			pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$" appForbiddenName="z@z.com" appForbiddenEmailValidator>
-			<div [hidden]="emailErr.valid || emailErr.pristine" class="alert alert-danger">
-				<div *ngIf="emailErr?.errors?.required">
-					Este campo es obligatorio
-				</div>
-				<div *ngIf="emailErr?.errors?.minlength">
-					La longitud mínima es de 5
-				</div>
-				<div *ngIf="emailErr?.errors?.pattern">
-					El formato de email no es correcto
-				</div>
-				<div *ngIf="emailErr?.errors?.appForbiddenEmailValidator; else errorDefault">
-					Este email no puede ser usado
+			<div class="form-group col-6">
+				<label for="password">Password</label>
+				<input type="password" class="form-control" id="password" placeholder="Password" required [(ngModel)]="registroDatos.password" name="password" #passwordErr="ngModel" minlength="5">
+				<div [hidden]="passwordErr.valid || passwordErr.pristine" class="alert alert-danger">
+					<div *ngIf="passwordErr?.errors?.required">
+						Este campo es obligatorio
+					</div>
+					<div *ngIf="passwordErr?.errors?.minlength">
+						La longitud mínima es de 5
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="form-group">
-			<label>Sexo</label>
-			<div class="custom-control custom-radio custom-control-inline" *ngFor='let item of sexKeys'>
-				<input type='radio' name='sexo' [id]='item' [value]='item' [(ngModel)]='registroDatos.sexo' class='custom-control-input'>
-				<label class='custom-control-label' [for]='item'>{{ item }}</label>
+			<div class="form-group col-6">
+				<label for="email">Email</label>
+				<input type="text" class="form-control" id="email" placeholder="Email" required [(ngModel)]="registroDatos.email" name="email" #emailErr="ngModel" minlength="5"
+				pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$" appForbiddenName="z@z.com" appForbiddenEmailValidator>
+				<div [hidden]="emailErr.valid || emailErr.pristine" class="alert alert-danger">
+					<div *ngIf="emailErr?.errors?.required">
+						Este campo es obligatorio
+					</div>
+					<div *ngIf="emailErr?.errors?.minlength">
+						La longitud mínima es de 5
+					</div>
+					<div *ngIf="emailErr?.errors?.pattern">
+						El formato de email no es correcto
+					</div>
+					<div *ngIf="emailErr?.errors?.appForbiddenEmailValidator; else errorDefault">
+						Este email no puede ser usado
+					</div>
+				</div>
 			</div>
-		</div>
-		<div class="form-group">
-			<div><label for="idioma">Idioma</label></div>
-			<select class="custom-select" id="idioma" name="idioma" #idiomaErr="ngModel" required [(ngModel)]="registroDatos.idioma">
-				<option value="" disabled selected hidden>Selecciona un idioma</option>
-				<option *ngFor="let idioma of idiomaKeys" placeholder="Selecciona idioma" [value]="idioma.key">{{ idioma.idioma }}</option>
-			</select>
-			<div [hidden]="idiomaErr.valid || idiomaErr.pristine" class="alert alert-danger">
-				El idioma es obligatorio
+			<div class="form-group col-6">
+				<label for="importe">Importe</label>
+				<input type="text" class="form-control" id="importe" placeholder="Importe" required [(ngModel)]="registroDatos.importe" name="importe" #importeErr="ngModel" OnlyNumber="positive:2">
+				<div [hidden]="importeErr.valid || importeErr.pristine" class="alert alert-danger">
+					<div *ngIf="importeErr?.errors?.required">
+						Este campo es obligatorio
+					</div>
+				</div>
 			</div>
-		</div>
-		<div class="form-group">
-			<div class="custom-control custom-checkbox">
-				<input type="checkbox" class="custom-control-input" id="customCheck1" name="isOk" required [(ngModel)]="registroDatos.isOk">
-				<label class="custom-control-label w-100" for="customCheck1">
-					Acepta las condiciones
-				</label>
+			<div class="form-group col-6">
+				<label>Sexo</label>
+				<div class="custom-control custom-radio custom-control-inline" *ngFor='let item of sexKeys'>
+					<input type='radio' name='sexo' [id]='item' [value]='item' [(ngModel)]='registroDatos.sexo' class='custom-control-input'>
+					<label class='custom-control-label' [for]='item'>{{ item }}</label>
+				</div>
 			</div>
-		</div>
-		<button type="submit" class="btn btn-primary" [disabled]="!registroFormErr.valid">Enviar</button><br>
-		<div *ngIf="msgerror!=''" class="text-danger small">
-			{{ msgerror }}
-		</div>
-		<div *ngIf="msgerror==''" class="text-sucess small">
-			Operación realizada con éxito
-		</div>
-		{{ registroDatos | json }}
-	</form>
-</div>
+			<div class="form-group col-6">
+				<div><label for="idioma">Idioma</label></div>
+				<select class="custom-select" id="idioma" name="idioma" #idiomaErr="ngModel" required [(ngModel)]="registroDatos.idioma">
+					<option value="" disabled selected hidden>Selecciona un idioma</option>
+					<option *ngFor="let idioma of idiomaKeys" placeholder="Selecciona idioma" [value]="idioma.key">{{ idioma.idioma }}</option>
+				</select>
+				<div [hidden]="idiomaErr.valid || idiomaErr.pristine" class="alert alert-danger">
+					El idioma es obligatorio
+				</div>
+			</div>
+			<div class="form-group col-6">
+				<div class="custom-control custom-checkbox">
+					<input type="checkbox" class="custom-control-input" id="customCheck1" name="isOk" required [(ngModel)]="registroDatos.isOk">
+					<label class="custom-control-label w-100" for="customCheck1">
+						Acepta las condiciones
+					</label>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary" [disabled]="!registroFormErr.valid">Enviar</button><br>
+			<div *ngIf="msgerror!=''" class="text-danger small">
+				{{ msgerror }}
+			</div>
+			<div *ngIf="msgerror==''" class="text-sucess small">
+				Operación realizada con éxito
+			</div>
+			{{ registroDatos | json }}
+		</form>
+	</div>
 
-<ng-template #errorDefault>
-	<b>Campo no válido</b>
-</ng-template>
+	<ng-template #errorDefault>
+		<b>Campo no válido</b>
+	</ng-template>
+</section>
